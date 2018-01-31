@@ -115,4 +115,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return user;
     }
+
+    public boolean isEmailExists(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USER,new String[]{KEY_ID,KEY_NAME,
+                KEY_EMAIL,KEY_UID,KEY_CREATED_AT},KEY_EMAIL+"=?",new String[]{email},null,null,null,null);
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            //if cursor has value then in user database there is user associated with this given email so return true
+            return true;
+        }
+
+        //if email does not exist return false
+        return false;
+    }
 }

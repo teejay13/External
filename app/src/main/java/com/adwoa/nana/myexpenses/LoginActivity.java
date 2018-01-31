@@ -93,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
 
         String tag_string_req = "req_login";
 
-        pDialog.setMessage("Logging in ...");
-        showDialog();
+        /*pDialog.setMessage("Logging in ...");
+        showDialog();*/
 
         User currentUser = db.Authenticate(new User(null,null,email,password));
 
