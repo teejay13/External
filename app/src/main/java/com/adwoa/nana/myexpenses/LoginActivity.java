@@ -2,6 +2,7 @@ package com.adwoa.nana.myexpenses;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.adwoa.nana.myexpenses.model.User;
 import com.adwoa.nana.myexpenses.util.DatabaseHelper;
 import com.adwoa.nana.myexpenses.util.SessionManager;
 
@@ -93,6 +95,26 @@ public class LoginActivity extends AppCompatActivity {
 
         pDialog.setMessage("Logging in ...");
         showDialog();
+
+        User currentUser = db.Authenticate(new User(null,null,email,password));
+
+        if (currentUser != null){
+
+            Snackbar.make(btnLogin,"Successfully Logged in!",Snackbar.LENGTH_LONG).show();
+
+            //User Logged in Successfully Launch You home screen activity
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+        }else {
+
+        //User Logged in Failed
+        Snackbar.make(btnLogin, "Failed to log in , please try again", Snackbar.LENGTH_LONG).show();
+
+        }
+
+
 
     }
 
